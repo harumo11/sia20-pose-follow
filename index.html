@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Velocity control and pose following documentation.">
+  <meta name="author" content="harumo">
+  <link rel="shortcut icon" href="img/favicon.ico">
+  <title>sia20-pose-follow - sia20-pose-follow</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css" rel="stylesheet">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "sia20-pose-follow";
+    var mkdocs_page_input_path = "index.md";
+    var mkdocs_page_url = null;
+  </script>
+  
+  <script src="js/jquery-2.1.1.min.js" defer></script>
+  <script src="js/modernizr-2.8.3.min.js" defer></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href="." class="icon icon-home"> sia20-pose-follow</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="./search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="current">
+	  
+          
+            <li class="toctree-l1 current">
+		
+    <a class="current" href=".">sia20-pose-follow</a>
+    <ul class="subnav">
+            
+    <li class="toctree-l2"><a href="#sia20-pose-follow">sia20-pose-follow</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l3" href="#_1">依存関係</a></li>
+        
+            <li><a class="toctree-l3" href="#_4">使い方</a></li>
+        
+            <li><a class="toctree-l3" href="#_5">理論</a></li>
+        
+            <li><a class="toctree-l3" href="#_6">トラブルシューティング</a></li>
+        
+        </ul>
+    
+
+    </ul>
+	    </li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href=".">sia20-pose-follow</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".">Docs</a> &raquo;</li>
+    
+      
+    
+    <li>sia20-pose-follow</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="sia20-pose-follow">sia20-pose-follow</h1>
+<p>このドキュメントはYaskawa社のロボットアームSIA20のon-the-flyな手先速度制御と手先位置制御をROSで行うための情報を含んでいます．</p>
+<p>このドキュメントは下記の環境を対象としています．</p>
+<table>
+<thead>
+<tr>
+<th>OS</th>
+<th>Ubuntu18.04</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ROS dist.</td>
+<td>Melodic</td>
+</tr>
+</tbody>
+</table>
+<h2 id="_1">依存関係</h2>
+<h3 id="_2">基本</h3>
+<table>
+<thead>
+<tr>
+<th>リンク</th>
+<th>説明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ROS Melodic</td>
+<td>ROS本体</td>
+</tr>
+<tr>
+<td><a href="https://github.com/harumo11/sia20-point-streaming">sia20-point-streaming</a></td>
+<td>SIA20でon-the-flyな制御コマンドを送るための改造されたROSパッケージ</td>
+</tr>
+<tr>
+<td><a href="https://github.com/harumo11/manipulator_pose_following">pose-following</a></td>
+<td>手先速度を計算するためのパッケージ</td>
+</tr>
+</tbody>
+</table>
+<h3 id="_3">オプショナル</h3>
+<table>
+<thead>
+<tr>
+<th>リンク</th>
+<th>説明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://github.com/harumo11/sia20">sia20</a></td>
+<td>SIA20を操作するために役立つプログラムなど</td>
+</tr>
+</tbody>
+</table>
+<h2 id="_4">使い方</h2>
+<h3 id="1">1. キーボードで動かす</h3>
+<p>これは<a href="https://github.com/harumo11/manipulator_pose_following">pose-following</a>の機能の一部です．下記のキーを押すことでロボットを操作することができます．一定速度で動かしたいときに便利です．この方法だとロボットの応答に遅れを感じるかもしれません．</p>
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>説明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1(q)</td>
+<td>+x(-x)</td>
+</tr>
+<tr>
+<td>2(w)</td>
+<td>+y(-y)</td>
+</tr>
+<tr>
+<td>3(e)</td>
+<td>+z(-z)</td>
+</tr>
+<tr>
+<td>4(r)</td>
+<td>+roll(-roll)</td>
+</tr>
+<tr>
+<td>5(t)</td>
+<td>+pitch(-pitch)</td>
+</tr>
+<tr>
+<td>6(y)</td>
+<td>+yaw(-yaw)</td>
+</tr>
+<tr>
+<td>0(-p)</td>
+<td>velocity up(down)</td>
+</tr>
+</tbody>
+</table>
+<pre><code> roslaunch motoman_sia20d_moveit_config moveit_planning_execution.launch sim:=false controller:=fs100 robot_ip:=10.0.0.2
+</code></pre>
+
+<pre><code>roslaunch manipulator_pose_following pose_following.launch
+</code></pre>
+
+<pre><code>roslaunch manipulator_pose_following kb_jogging.launch
+</code></pre>
+
+<pre><code>rosservice call /robot_enable
+rosservice call /pose_following/start
+</code></pre>
+
+<h3 id="2-dualshock4">2. DualShock4で動かす</h3>
+<p>これは<a href="https://github.com/harumo11/sia20">sia20</a>の機能の一部です．PlayStation4(Sony)のDualShock4を利用することで手先の速度制御を行うことができます．上記のキーボードで動かす方法よりロボットの遅れは少なく感じられるはずです．速度を色々変えて試してみたいときに便利です．
+下記のコマンドを入力する前にDualShock4をUSB経由でPCに接続してください．
+ただし，安全のために移動速度はゆっくりにしてあります．</p>
+<p>SIA20のコントロール方法は下記のとおりです．</p>
+<table>
+<thead>
+<tr>
+<th>方向</th>
+<th>ボタン</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>左アナログスティック(上下)</td>
+<td>x方向</td>
+</tr>
+<tr>
+<td>左アナログスティック(左右)</td>
+<td>y方向</td>
+</tr>
+<tr>
+<td>左アナログスティック(上下)+☓ボタン</td>
+<td>z方向</td>
+</tr>
+<tr>
+<td>右アナログスティック(上下)</td>
+<td>roll方向</td>
+</tr>
+<tr>
+<td>右アナログスティック(左右)</td>
+<td>pitch方向</td>
+</tr>
+<tr>
+<td>R2, L2</td>
+<td>yaw方向</td>
+</tr>
+</tbody>
+</table>
+<pre><code> roslaunch motoman_sia20d_moveit_config moveit_planning_execution.launch sim:=false controller:=fs100 robot_ip:=10.0.0.2
+</code></pre>
+
+<pre><code>roslaunch manipulator_pose_following pose_following.launch
+</code></pre>
+
+<pre><code>rosrun joy joy_node
+</code></pre>
+
+<pre><code>rosrun sia20_control ds4totwist
+</code></pre>
+
+<pre><code>rosservice call /robot_enable
+rosservice call /pose_following/start
+</code></pre>
+
+<h3 id="3-htc-vive">3. HTC Viveで動かす</h3>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>現在作成中です．</p>
+</div>
+<h3 id="4">4. プログラムから使う</h3>
+<p><strong>pose_following/cmd_vel</strong>という名前をつけて
+<strong>geometry/Twist</strong>型のトピックをpublishすると手先速度を操作することができます．</p>
+<p><a href="https://github.com/harumo11/sia20/blob/master/sia20_control/src/ds4totwist.cpp">サンプルプログラム</a></p>
+<h2 id="_5">理論</h2>
+<p>下記の計算式を解いて手先速度から関節角度を導いています．</p>
+<div>
+<div class="MathJax_Preview"> \boldsymbol{J}^{+} = \boldsymbol{J}^{T}(\boldsymbol{J} \boldsymbol{J}^T)^{-1}</div>
+<script type="math/tex; mode=display"> \boldsymbol{J}^{+} = \boldsymbol{J}^{T}(\boldsymbol{J} \boldsymbol{J}^T)^{-1}</script>
+</div>
+<div>
+<div class="MathJax_Preview"> \boldsymbol{\dot q} = \boldsymbol{J}^{+} \boldsymbol{\dot r}</div>
+<script type="math/tex; mode=display"> \boldsymbol{\dot q} = \boldsymbol{J}^{+} \boldsymbol{\dot r}</script>
+</div>
+<p>ここで<span><span class="MathJax_Preview">\boldsymbol{J}^{+}</span><script type="math/tex">\boldsymbol{J}^{+}</script></span>はヤコビ行列の疑似逆行列であり，<span><span class="MathJax_Preview">\boldsymbol{\dot q}</span><script type="math/tex">\boldsymbol{\dot q}</script></span>は関節速度ベクトル（次元は7)，<span><span class="MathJax_Preview">\boldsymbol{\dot r}</span><script type="math/tex">\boldsymbol{\dot r}</script></span>は手先の速度ベクトルです(次元は６)．
+全関節の動きをなるべく抑えるという拘束条件のもと，速度の逆運動学を計算しています．そのため，いきなり大きな動きをするということはありません．</p>
+<h2 id="_6">トラブルシューティング</h2>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>現在作成中です．</p>
+</div>
+              
+            </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+      <p>Copyright (c) 2019</p>
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+      
+      
+    </span>
+</div>
+    <script>var base_url = '.';</script>
+    <script src="js/theme.js" defer></script>
+      <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" defer></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" defer></script>
+      <script src="search/main.js" defer></script>
+
+</body>
+</html>
+
+<!--
+MkDocs version : 1.0.4
+Build Date UTC : 2019-11-21 18:23:47
+-->
