@@ -39,21 +39,20 @@
 | 6(y)  | +yaw(-yaw)        |
 | 0(-p) | velocity up(down) |
 
+```Bash
+roslaunch motoman_sia20d_moveit_config moveit_planning_execution.launch sim:=false controller:=fs100 robot_ip:=10.0.0.2
 ```
- roslaunch motoman_sia20d_moveit_config moveit_planning_execution.launch sim:=false controller:=fs100 robot_ip:=10.0.0.2
+```Bash
+rosservice call /robot_enable
 ```
-
-```
+```Bash
 roslaunch manipulator_pose_following pose_following.launch
 ```
-
-```
-roslaunch manipulator_pose_following kb_jogging.launch
-```
-
-```
-rosservice call /robot_enable
+```Bash
 rosservice call /pose_following/start
+```
+```Bash
+roslaunch manipulator_pose_following kb_jogging.launch
 ```
 
 ### 2. DualShock4で動かす
@@ -73,26 +72,30 @@ SIA20のコントロール方法は下記のとおりです．
 |右アナログスティック(左右)|pitch方向|
 |R2, L2|yaw方向|
 
-```
- roslaunch motoman_sia20d_moveit_config moveit_planning_execution.launch sim:=false controller:=fs100 robot_ip:=10.0.0.2
+```Bash
+roslaunch motoman_sia20d_moveit_config moveit_planning_execution.launch sim:=false controller:=fs100 robot_ip:=10.0.0.2
 ```
 
+```Bash
+rosservice call /robot_enable
 ```
+
+```Bash
 roslaunch manipulator_pose_following pose_following.launch
 ```
 
 ```
+rosservice call /pose_following/start
+```
+
+```Bash
 rosrun joy joy_node
 ```
 
-```
+```Bash
 rosrun sia20_control ds4totwist
 ```
 
-```
-rosservice call /robot_enable
-rosservice call /pose_following/start
-```
 
 ### 3. HTC Viveで動かす
 
