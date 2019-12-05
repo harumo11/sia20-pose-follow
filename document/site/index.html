@@ -201,17 +201,19 @@
 </tr>
 </tbody>
 </table>
-<pre><code> roslaunch motoman_sia20d_moveit_config moveit_planning_execution.launch sim:=false controller:=fs100 robot_ip:=10.0.0.2
+<pre><code class="Bash">roslaunch motoman_sia20d_moveit_config moveit_planning_execution.launch sim:=false controller:=fs100 robot_ip:=10.0.0.2
 </code></pre>
 
-<pre><code>roslaunch manipulator_pose_following pose_following.launch
+<pre><code class="Bash">rosservice call /robot_enable
 </code></pre>
 
-<pre><code>roslaunch manipulator_pose_following kb_jogging.launch
+<pre><code class="Bash">roslaunch manipulator_pose_following pose_following.launch
 </code></pre>
 
-<pre><code>rosservice call /robot_enable
-rosservice call /pose_following/start
+<pre><code class="Bash">rosservice call /pose_following/start
+</code></pre>
+
+<pre><code class="Bash">roslaunch manipulator_pose_following kb_jogging.launch
 </code></pre>
 
 <h3 id="2-dualshock4">2. DualShock4で動かす</h3>
@@ -253,20 +255,22 @@ rosservice call /pose_following/start
 </tr>
 </tbody>
 </table>
-<pre><code> roslaunch motoman_sia20d_moveit_config moveit_planning_execution.launch sim:=false controller:=fs100 robot_ip:=10.0.0.2
+<pre><code class="Bash">roslaunch motoman_sia20d_moveit_config moveit_planning_execution.launch sim:=false controller:=fs100 robot_ip:=10.0.0.2
 </code></pre>
 
-<pre><code>roslaunch manipulator_pose_following pose_following.launch
+<pre><code class="Bash">rosservice call /robot_enable
 </code></pre>
 
-<pre><code>rosrun joy joy_node
+<pre><code class="Bash">roslaunch manipulator_pose_following pose_following.launch
 </code></pre>
 
-<pre><code>rosrun sia20_control ds4totwist
+<pre><code>rosservice call /pose_following/start
 </code></pre>
 
-<pre><code>rosservice call /robot_enable
-rosservice call /pose_following/start
+<pre><code class="Bash">rosrun joy joy_node
+</code></pre>
+
+<pre><code class="Bash">rosrun sia20_control ds4totwist
 </code></pre>
 
 <h3 id="3-htc-vive">3. HTC Viveで動かす</h3>
@@ -338,5 +342,5 @@ rosservice call /pose_following/start
 
 <!--
 MkDocs version : 1.0.4
-Build Date UTC : 2019-11-21 18:23:47
+Build Date UTC : 2019-11-22 12:02:20
 -->
